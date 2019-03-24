@@ -1,0 +1,2 @@
+[14-Dec-2018 07:35:46 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'u5560132'@'localhost' to database 'alkitab' in /home/u5560132/public_html/firmanhidup/config/koneksi.php on line 2
+[14-Dec-2018 07:35:47 UTC] PHP Warning:  mysqli_connect(): (HY000/1044): Access denied for user 'u5560132'@'localhost' to database 'alkitab' in /home/u5560132/public_html/firmanhidup/config/koneksi.php on line 2
