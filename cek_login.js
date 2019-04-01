@@ -71,7 +71,7 @@ return;
 
 
 
-    window.location.replace("http://adminfirmanhidup.cmcsurabaya.org/media.php?module=home");
+    window.location.replace("http://localhost/adminfirmanhidup/media.php?module=home");
 
 
 }
