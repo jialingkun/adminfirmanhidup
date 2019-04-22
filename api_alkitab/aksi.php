@@ -236,11 +236,12 @@ if (!$mail->send()) {
 
 }else if($_GET['act']=="get_ranking"){
 
-	$sql=mysqli_query($con,"SELECT * FROM poin ORDER BY poin DESC, tanggal_modifikasi ASC LIMIT 50");
+	$sql=mysqli_query($con,"SELECT * FROM poin NATURAL JOIN member ORDER BY poin DESC, tanggal_modifikasi ASC LIMIT 50");
 	$output=null;
 	while($hsl=mysqli_fetch_array($sql)){
 		$output[]=array(
 			"email"=>$hsl['email'],
+			"nama" =>$hsl['nama'],
 			"poin"=>$hsl['poin']
 			);
 
