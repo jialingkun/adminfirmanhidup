@@ -44,18 +44,35 @@ if($request == 2){
           // Check its not folder
           if(!is_dir($file_path)){
 
-             $size = filesize($file_path);
+           $size = filesize($file_path);
 
-             $file_list[] = array('name'=>$file,'size'=>$size,'path'=>$root_file_path);
+           $file_list[] = array('name'=>$file,'size'=>$size,'path'=>$root_file_path);
 
-          }
-        }
+         }
+       }
 
-      }
-      closedir($dh);
-    }
-  }
+     }
+     closedir($dh);
+   }
+ }
 
-  echo json_encode($file_list);
-  exit;
+ echo json_encode($file_list);
+ exit;
 }
+
+if ($request == 3) {
+  if(isset($_POST['filename'])){
+    $filename = $_POST['filename'];
+    $filePath = $target_dir.$filename;
+    if (file_exists($filePath)) {
+      unlink($filePath);
+      echo "File Successfully Delete."; 
+    }else{
+      echo "File Not Exist.";
+    }
+  }else{
+    echo "Failed to detect filename";
+  }
+}
+
+?>
