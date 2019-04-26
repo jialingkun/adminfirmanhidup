@@ -40,7 +40,6 @@ include "config/koneksi.php";
 
 		/*dropzone*/
 		.container{
-			margin: 0 auto; 
 			width: 100%;
 		}
 

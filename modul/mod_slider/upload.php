@@ -75,4 +75,16 @@ if ($request == 3) {
   }
 }
 
+if ($request == 4) {
+  include "../../config/koneksi.php";
+  $number = $_POST['slideNumber'];
+  $url = $_POST['url'];
+  $sql=mysqli_query($con,"UPDATE slider_url SET url='$url' WHERE slide_number=$number");
+  if ($sql){
+    echo "Slide ".$number." berhasil disimpan.";
+  }else{
+    echo "Link slide tidak berubah.";
+  }
+}
+
 ?>

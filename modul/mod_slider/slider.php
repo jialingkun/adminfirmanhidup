@@ -1,7 +1,7 @@
 <?php
 session_start();
 $jumlah_slot = 5;
-// include "config/koneksi.php";
+include "config/koneksi.php";
 
 //set headers to NOT cache a page
 // header("Cache-Control: no-cache, must-revalidate, no-store"); //HTTP 1.1
@@ -15,24 +15,32 @@ $jumlah_slot = 5;
 <div class="panel panel-bordered border-danger">
     <div class="panel-body">
         <?php  
-        for ($i=1; $i <= $jumlah_slot; $i++) { 
+        for ($i=1; $i <= $jumlah_slot; $i++) {
+            $sql=mysqli_query($con,"SELECT * FROM slider_url WHERE slide_number=$i");
+            $data=mysqli_fetch_array($sql);
             ?>
-            <div class="container">
-                <div style="float:left;">
-                    <div>Slide <?php echo $i; ?> </div>
+            <div class="container" style="margin-bottom:2%;">
+                <div class="col-md-3">
+                    <div><h6><b>Slide <?php echo $i; ?></b> (Size: 1366 x 768) </h6></div>
                     <div class='dropzone-container'>
                         <form action="modul/mod_slider/upload.php" class="dropzone" enctype='multipart/form-data' id="drop<?php echo $i; ?>"></form>
                     </div>
                 </div>
-                <div style="float:left;">
-                    <div>Preview</div>
-                    <div>
+                <div class="col-md-5">
+                    <div><h6><b>Preview</b></h6></div>
+                    <div style="margin-bottom:5%;">
                         <img src="modul/mod_slider/upload/slide<?php echo $i; ?>.jpg" height="200px" id="preview<?php echo $i; ?>" alt="Tidak ada Gambar">
                     </div>
-                </div>
-                <div style="float:left;">
-                    <div>Remove Slide</div>
                     <div>
+                        <div><b>Link</b></div>
+                        <input type="text" id="urlslide<?php echo $i; ?>" style="width:91%;" placeholder="http://" value="<?php echo $data['url']; ?>">
+                    </div>
+
+                </div>
+                <div class="col-md-4">
+                    <div><h6><b>Action</b></h6></div>
+                    <div>
+                        <button type="button" class="btn btn-success" onclick="saveurl(<?php echo $i; ?>)" style="margin-right:5%;">SAVE</button>
                         <button type="button" class="btn btn-danger" onclick="removeslide(<?php echo $i; ?>)">DELETE</button>
                     </div>
                 </div>
@@ -50,7 +58,7 @@ $jumlah_slot = 5;
                 ?>
 
                 $("#drop<?php echo $i; ?>").dropzone({
-                    resizeWidth: 2048,
+                    resizeWidth: 1024,
                     renameFile: function (file) {
                         return "slide<?php echo $i; ?>.jpg";
                     },
@@ -75,27 +83,6 @@ $jumlah_slot = 5;
             }
             ?>
 
-            // $("#drop2").dropzone({
-            //     resizeWidth: 2048,
-            //     renameFile: function (file) {
-            //         return "slide2.jpg";
-            //     },
-            //     init: function() {
-            //         this.hiddenFileInput.removeAttribute('multiple');
-            //         d = new Date();
-            //         $("#preview2").attr("src", "modul/mod_slider/upload/slide2.jpg?v="+d.getTime());
-            //         this.on('addedfile', function(file) {
-            //             if (this.files.length > 1) {
-            //                 this.removeFile(this.files[0]);
-            //             }
-            //         });
-            //         this.on('complete', function(file) {
-            //             d = new Date();
-            //             $("#preview2").attr("src", "modul/mod_slider/upload/slide2.jpg?v="+d.getTime());
-            //         });
-            //     }
-            // });
-
 
             function removeslide(number){
                 if (confirm("Ingin Menghapus?")) {
@@ -110,6 +97,19 @@ $jumlah_slot = 5;
                         }
                     });
                 }
+
+            }
+
+            function saveurl(number){
+                linkurl = $("#urlslide"+number).val();
+                $.ajax({
+                    url: 'modul/mod_slider/upload.php',
+                    type: 'post',
+                    data: {request: 4, slideNumber:number, url:linkurl},
+                    success: function(response){
+                        alert(response);
+                    }
+                });
 
             }
         </script>

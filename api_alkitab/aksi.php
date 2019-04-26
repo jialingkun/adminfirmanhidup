@@ -266,6 +266,24 @@ if (!$mail->send()) {
 
 	echo json_encode($output);
 
+}else if($_GET['act']=="get_slide_url"){
+	$slideNumber=$_GET['slideNumber'];
+
+	$sql=mysqli_query($con,"SELECT * FROM slider_url WHERE slide_number='$slideNumber'");
+	$hsl=mysqli_fetch_array($sql);
+	if ($hsl['url']==null || $hsl['url']=="") {
+		$url = "#";
+	}else{
+		$url = $hsl['url'];
+	}
+	$output=array(
+		"url"=>$url
+		);
+
+
+
+	echo json_encode($output);
+
 }
 
 
