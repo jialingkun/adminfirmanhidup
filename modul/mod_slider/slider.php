@@ -19,25 +19,25 @@ include "config/koneksi.php";
             $sql=mysqli_query($con,"SELECT * FROM slider_url WHERE slide_number=$i");
             $data=mysqli_fetch_array($sql);
             ?>
-            <div class="container" style="margin-bottom:2%;">
+            <div class="container" style="margin-bottom:3%;">
                 <div class="col-md-3">
-                    <div><h6><b>Slide <?php echo $i; ?></b> (Size: 1366 x 768) </h6></div>
+                    <div><h6><b>Slide <?php echo $i; ?></b> (Size: 720 x 360) </h6></div>
                     <div class='dropzone-container'>
                         <form action="modul/mod_slider/upload.php" class="dropzone" enctype='multipart/form-data' id="drop<?php echo $i; ?>"></form>
                     </div>
                 </div>
                 <div class="col-md-5">
                     <div><h6><b>Preview</b></h6></div>
-                    <div style="margin-bottom:5%;">
-                        <img src="modul/mod_slider/upload/slide<?php echo $i; ?>.jpg" height="200px" id="preview<?php echo $i; ?>" alt="Tidak ada Gambar">
+                    <div style="margin-bottom:2%;">
+                        <img src="#" height="200px" id="preview<?php echo $i; ?>" alt="Tidak ada Gambar">
                     </div>
                     <div>
                         <div><b>Link</b></div>
-                        <input type="text" id="urlslide<?php echo $i; ?>" style="width:91%;" placeholder="http://" value="<?php echo $data['url']; ?>">
+                        <input type="text" id="urlslide<?php echo $i; ?>" style="width:100%;" placeholder="http://" value="<?php echo $data['url']; ?>">
                     </div>
 
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3" style="padding-left:3%">
                     <div><h6><b>Action</b></h6></div>
                     <div>
                         <button type="button" class="btn btn-success" onclick="saveurl(<?php echo $i; ?>)" style="margin-right:5%;">SAVE</button>

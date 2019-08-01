@@ -20,12 +20,13 @@ if ($_GET['act']=="login"){
 
 	if ($jml1<=0){
 		$sql=mysqli_query($con,"INSERT INTO member (email,nama) VALUE ('$email','$nama')");
-	}
-
-	if ($sql){
-		$output=array("status"=>"sukses");
+		if ($sql){
+			$output=array("status"=>"sukses");
+		}else{
+			$output=array("status"=>"gagal","error"=>mysqli_error($con));
+		}
 	}else{
-		$output=array("status"=>"gagal","error"=>mysqli_error($con));
+		$output=array("status"=>"sukses");
 	}
 
 	echo json_encode($output);
@@ -73,7 +74,7 @@ if ($_GET['act']=="login"){
 			"judul"=>$hsl['judul'],
 			"deskripsi"=>$hsl['deskripsi'],
 			"id_pengumuman"=>$hsl['id_pengumuman']
-			);
+		);
 
 	}
 
@@ -90,7 +91,7 @@ if ($_GET['act']=="login"){
 		"nama_rek"=>$hsl['nama_rek'],
 		"bank"=>$hsl['bank'],
 		"deskripsi"=>$hsl['deskripsi']
-		);
+	);
 
 
 
@@ -243,7 +244,7 @@ if (!$mail->send()) {
 			"email"=>$hsl['email'],
 			"nama" =>$hsl['nama'],
 			"poin"=>$hsl['poin']
-			);
+		);
 
 	}
 	echo json_encode($output);
@@ -260,7 +261,7 @@ if (!$mail->send()) {
 	$output=array(
 		"email"=>$hsl['email'],
 		"poin"=>$poin
-		);
+	);
 
 
 
@@ -278,7 +279,7 @@ if (!$mail->send()) {
 	}
 	$output=array(
 		"url"=>$url
-		);
+	);
 
 
 
