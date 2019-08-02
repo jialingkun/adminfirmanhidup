@@ -17,12 +17,18 @@ include "config/koneksi.php";
                 <button type="button" onclick="tambah_data(this);" class="btn bg-grey-800 btn-block"><i class="icon-add"></i> Tambah Data</button>
                 <br>
             </div>
-            
+            <?php 
+            $sql=mysqli_query($con,"SELECT * FROM embed WHERE id='popup meditasi firman'");
+            $data=mysqli_fetch_array($sql);
+            ?>
             <!-- embed -->
             <div class="col-md-10">
-                <div class="col-md-3"><b style="float:right;">Embed</b></div>
-                <div class="col-md-8"><input type="text" style="width:100%;" placeholder="embed text" value=""></div>
-                <div class="col-md-1"><button type="button" class="btn btn-success" onclick="">SAVE</button></div>
+                <div class="col-md-3"><b style="float:right; margin-top: 6%;">Embed</b></div>
+                <div class="col-md-8">
+                        <textarea class="form-control" style="width:100%;" rows="1" id="embed" placeholder="Paste Embed Text Here"><?php echo $data['value']; ?></textarea>
+                        <input type="text" class="form-control" style="width:100%;" id="url" placeholder="http://" value="<?php echo $data['url']; ?>">
+                </div>
+                <div class="col-md-1"><button type="button" class="btn btn-success" onclick="saveembed()">SAVE</button></div>
             </div>
         </div>
 
@@ -289,5 +295,21 @@ include "config/koneksi.php";
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    function saveembed(){
+        embedvalue = $("#embed").val();
+        embedurl = $("#url").val();
+        $.ajax({
+            url: 'modul/mod_meditasi/upload.php',
+            type: 'post',
+            data: {embed:embedvalue, url:embedurl},
+            success: function(response){
+                alert(response);
+            }
+        });
+
+    }
+</script>
 
 

@@ -205,8 +205,8 @@ if ($_GET['act']=="login"){
 	$mail->Password = 'qwer@1234';
 	$mail->addAddress("firmanhidup@cmcsurabaya.org");
 
-	$mail->setFrom("abizargroup@gmail.com");
-	$mail->Subject = "Kesaksian dari abizargroup";
+	$mail->setFrom("firmanhidup@cmcsurabaya.org");
+	$mail->Subject = "Kesaksian dari firman hidup";
 	$mail->msgHTML('<b>Isi Kesaksian :</b><br><table><tr><td align="justify">Kesaksian ini untuk orang orang orang orang Kesaksian ini untuk orang orang orang orangKesaksian ini untuk orang orang orang orangKesaksian ini untuk orang orang orang orangKesaksian ini untuk orang orang orang orangKesaksian ini untuk orang orang orang orang</td></tr></table>');
 /*
 $mail->setFrom($_POST['email']);
@@ -285,6 +285,14 @@ if (!$mail->send()) {
 
 	echo json_encode($output);
 
+}else if($_GET['act']=="get_embed"){
+	$sql=mysqli_query($con,"SELECT * FROM embed WHERE id='popup meditasi firman'");
+	$hsl=mysqli_fetch_array($sql);
+	if(strpos( $hsl['value'], "<img" ) !== false) {
+    	echo '<a href="#" class="embedimage-container" data-url="'.$hsl['url'].'" onclick="link_open(this);">'.$hsl['value'].'</a>';
+	}else{
+		echo '<div class="embedvideo-container">'.$hsl['value'].'</div>';
+	}
 }
 
 
