@@ -224,8 +224,13 @@ if (!$mail->send()) {
 
 }else if($_GET['act']=="tambah_poin"){
 	$email=$_GET['email'];
+	if(isset($_GET['incpoin'])) {
+    	$incpoin = $_GET['incpoin'];
+	}else{
+		$incpoin = 1;
+	}
 
-	$sql=mysqli_query($con,"INSERT INTO poin (email,poin,tanggal_modifikasi) VALUES ('$email',1,NOW()) ON DUPLICATE KEY UPDATE poin = poin+1, tanggal_modifikasi = NOW()");
+	$sql=mysqli_query($con,"INSERT INTO poin (email,poin,tanggal_modifikasi) VALUES ('$email',$incpoin,NOW()) ON DUPLICATE KEY UPDATE poin = poin+$incpoin, tanggal_modifikasi = NOW()");
 
 	if ($sql){
 		$output=array("status"=>"sukses");
