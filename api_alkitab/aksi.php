@@ -108,7 +108,7 @@ if ($_GET['act']=="login"){
 
 	if ($sql){
 		$output=array("status"=>"sukses",
-			"meditasi"=>nl2br($hsl['meditasi']),
+			"meditasi"=>nl2br(addslashes($hsl['meditasi'])),
 			"waktu"=>$hsl['atur_waktu'],
 			"status_meditasi"=>$hsl['status_meditasi'],
 			"id_meditasi"=>$hsl['id_meditasi']);
@@ -139,7 +139,7 @@ if ($_GET['act']=="login"){
 	if ($sql){
 		$output=array("status"=>"sukses",
 			"judul"=>$hsl['judul'],
-			"pengumuman"=>nl2br($hsl['deskripsi']),
+			"pengumuman"=>nl2br(addslashes($hsl['deskripsi'])),
 //	"waktu"=>$hsl['atur_waktu'],
 			"status_pengumuman"=>$hsl['status_pengumuman'],
 			"id_pengumuman"=>$hsl['id_pengumuman']);
