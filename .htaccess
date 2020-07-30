@@ -1,5 +1,7 @@
 RewriteEngine On
-RewriteCond %{HTTP_HOST} ^abizargroup\.com\alkitab [NC]
+RewriteCond %{HTTP_HOST} ^cmcsurabaya\.org\adminfirmanhidup [NC]
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI}
 Options -Indexes
+Header add Access-Control-Allow-Origin "*"
+Header add Access-Control-Allow-Methods: "GET,POST,OPTIONS,DELETE,PUT"
